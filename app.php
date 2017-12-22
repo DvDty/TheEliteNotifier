@@ -1,6 +1,9 @@
 <?php
 
 include 'core/core.php';
+include 'entity/Record.php';
 
 $data = getData();
-$data = convert($data);
+$records = convert($data);
+
+save($records);
