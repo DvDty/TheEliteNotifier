@@ -2,83 +2,51 @@
 
 class Record
 {
-    private $title;
-    private $description;
-    private $date;
-    private $url;
+	private $title;
+	private $url;
+	private $description;
+	private $date;
 
-    public function __construct(string $title = '',
-                                string $description = '',
-                                DateTime $date,
-                                string $url = '')
-    {
-        $this->title = $title;
-        $this->description = $description;
-        $this->date = $date;
-        $this->url = $url;
-    }
+	public function __construct(string $title = "",
+	                            string $url = "",
+	                            string $description = "",
+	                            DateTime $date = null)
+	{
+		$this->title = $title;
+		$this->url = $url;
+		$this->description = $description;
+		$this->date = $date;
+	}
 
-    /**
-     * @return mixed
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
+	/**
+	 * @return string
+	 */
+	public function getTitle(): string
+	{
+		return $this->title;
+	}
 
-    /**
-     * @param mixed $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
+	/**
+	 * @return string
+	 */
+	public function getUrl(): string
+	{
+		return $this->url;
+	}
 
-    /**
-     * @return mixed
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
+	/**
+	 * @return string
+	 */
+	public function getDescription(): string
+	{
+		return $this->description;
+	}
 
-    /**
-     * @param mixed $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param mixed $date
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @param mixed $url
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-    }
+	/**
+	 * @return DateTime
+	 */
+	public function getDate(): DateTime
+	{
+		return $this->date;
+	}
 }
