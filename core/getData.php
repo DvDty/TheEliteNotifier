@@ -1,9 +1,10 @@
 <?php
 
-function getData()
+function getData(): string
 {
     $rssUrl = "https://rankings.the-elite.net/ge-untieds.rss";
     $rssData = file_get_contents($rssUrl);
+    //TODO: rss to json
 
     $rssData = explode(
         '<webMaster>ryandwyer1@gmail.com (Ryan Dwyer)</webMaster>',
@@ -11,8 +12,7 @@ function getData()
     );
 
     $rssData = explode('</channel>', $rssData[1]);
-    var_dump($rssData);
-    //TODO: rss to json
-}
+    $rssData = ($rssData[0]);
 
-getData();
+    return $rssData;
+}
