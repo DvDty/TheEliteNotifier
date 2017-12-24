@@ -1,6 +1,6 @@
 <?php
 
-function convert($data): string
+function rssToJson($data)
 {
 	$removes = [
 		'</item>',
