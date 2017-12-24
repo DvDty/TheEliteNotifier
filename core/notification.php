@@ -1,6 +1,9 @@
 <?php
 
-function notification(string $subject = '', string $message = ''): void
+/**
+ * @param Record[] $records
+ */
+function notification(array $records): void
 {
     $to = 'dvdtygc@gmail.com';
     $from = 'golden-eye@aluminabuild.com';
@@ -9,9 +12,12 @@ function notification(string $subject = '', string $message = ''): void
     $headers .= 'From: ' . $from . "\r\n";
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
-    $mail = mail($to, $subject, $message, $headers);
+    $subject = 'Untied world records update!';
+    $message = 'The following updates have been made in the elite rank list:<br>';
 
-    if (!$mail) {
-        //TODO: log
+    foreach ($records as $record) {
+        $message .= $record->getTitle() . "<br>";
     }
+
+    mail($to, $subject, $message, $headers);
 }
