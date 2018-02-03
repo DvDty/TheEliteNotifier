@@ -13,7 +13,7 @@ function notification(array $records): void
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
     $subject = 'Untied world records update!';
-    $message = 'The following updates have been made in the elite rank list:<br>';
+    $message = '<h1>The following updates have been made in the elite rank list:</h1><br><br>';
 
     foreach ($records as $record) {
         $message .= $record->getTitle() . "<br>";
