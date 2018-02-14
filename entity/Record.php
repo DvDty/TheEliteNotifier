@@ -8,9 +8,9 @@ class Record
 	private $date;
 
 	public function __construct(string $title = "",
-	                            string $url = "",
-	                            string $description = "",
-	                            DateTime $date = null)
+								string $url = "",
+								string $description = "",
+								DateTime $date = null)
 	{
 		$this->title = $title;
 		$this->url = $url;
