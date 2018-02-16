@@ -2,50 +2,107 @@
 
 class Record
 {
-	private $title;
+	private $type;
+	private $stage;
+	private $level;
+	private $time;
+	private $runner;
 	private $url;
 	private $description;
 	private $date;
 
-	public function __construct(string $title = "",
-								string $url = "",
-								string $description = "",
-								DateTime $date = null)
+
+	/**
+	 * Record constructor.
+	 * @param $type
+	 * @param $stage
+	 * @param $level
+	 * @param $time
+	 * @param $runner
+	 * @param $url
+	 * @param $description
+	 * @param $date
+	 */
+	public function __construct($type, $stage, $level, $time, $runner, $url, $description, $date)
 	{
-		$this->title = $title;
+		$this->type = $type;
+		$this->stage = $stage;
+		$this->level = $level;
+		$this->time = $time;
+		$this->runner = $runner;
 		$this->url = $url;
 		$this->description = $description;
 		$this->date = $date;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getTitle(): string
-	{
-		return $this->title;
-	}
 
 	/**
-	 * @return string
+	 * @return mixed
 	 */
-	public function getUrl(): string
+	public function getType()
+	{
+		return $this->type;
+	}
+
+
+	/**
+	 * @return mixed
+	 */
+	public function getStage()
+	{
+		return $this->stage;
+	}
+
+
+	/**
+	 * @return mixed
+	 */
+	public function getLevel()
+	{
+		return $this->level;
+	}
+
+
+	/**
+	 * @return mixed
+	 */
+	public function getTime()
+	{
+		return $this->time;
+	}
+
+
+	/**
+	 * @return mixed
+	 */
+	public function getRunner()
+	{
+		return $this->runner;
+	}
+
+
+	/**
+	 * @return mixed
+	 */
+	public function getUrl()
 	{
 		return $this->url;
 	}
 
+
 	/**
-	 * @return string
+	 * @return mixed
 	 */
-	public function getDescription(): string
+	public function getDescription()
 	{
 		return $this->description;
 	}
 
+
 	/**
-	 * @return DateTime
+	 * @return mixed
 	 */
-	public function getDate(): DateTime
+	public function getDate()
 	{
 		return $this->date;
 	}
