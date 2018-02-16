@@ -1,18 +1,20 @@
 <?php
 
+namespace PavelGrancharov\TheEliteNotifier\Controllers;
+
 class UpdaterController
 {
-	public function checkForChanges()
+	public static function checkForChanges()
 	{
 
 	}
 
-	public function saveChanges()
+	public static function saveChanges()
 	{
 
 	}
 
-	public function sendEmails()
+	public static function sendEmails()
 	{
 
 	}
