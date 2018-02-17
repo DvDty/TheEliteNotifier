@@ -2,9 +2,6 @@
 
 namespace PavelGrancharov\TheEliteNotifier\Controllers;
 
-use DateTime;
-use Record;
-
 class RecordsController
 {
 	public static function setRecords()
@@ -58,14 +55,38 @@ class RecordsController
 			$title = trim(explode('<link>', explode('<title>', $xml)[1])[0]);
 			$title = explode(" - ", $title);
 			$stage = $title[0];
-			$level = $title[1];
+
+			switch ($title[1]) {
+				case 'A':
+					$level = 'Agent';
+					break;
+				case 'SA':
+					$level = 'Secret Agent';
+					break;
+				case '00A':
+					$level = '00 Agent';
+					break;
+				default:
+					$level = 'XML Parsing error';
+					break;
+			}
+
 			$time = explode(' by ', $title[2])[0];
 			$runner = explode(' by ', $title[2])[1];
 			$url = trim(explode('<description>', explode('<link>', $xml)[1])[0]);
 			$description = trim(explode('<pubDate>', explode('<description>', $xml)[1])[0]);
-			$date = new DateTime(explode('<guid>', explode('<pubDate>', $xml)[1])[0]);
+			$date = trim(explode('<guid>', explode('<pubDate>', $xml)[1])[0]);
 
-			$records[] = new Record($type, $stage, $level, $time, $runner, $url, $description, $date);
+			$records[] = [
+				'type'        => $type,
+				'stage'       => $stage,
+				'level'       => $level,
+				'time'        => $time,
+				'runner'      => $runner,
+				'url'         => $url,
+				'description' => $description,
+				'date'        => $date
+			];
 		}
 
 		return $records;
