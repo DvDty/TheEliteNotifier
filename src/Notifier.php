@@ -9,7 +9,6 @@ class Notifier
 {
 	private $records = [];
 
-
 	public function start()
 	{
 		$this->records = RecordsController::setRecords();
