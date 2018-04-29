@@ -4,6 +4,8 @@ namespace PavelGrancharov\TheEliteNotifier\Controllers;
 
 class UpdaterController
 {
+	const MAX_RECORDS = 50;
+
 	public static function checkForChanges(array $worldRecords)
 	{
 		foreach ($worldRecords as $type => $records) {
@@ -31,7 +33,7 @@ class UpdaterController
 		$oldRecords = self::getOldRecords($type);
 		$newRecords = [];
 
-		for ($i = 0; $i < 50; $i++) {
+		for ($i = 0; $i < self::MAX_RECORDS; $i++) {
 			if ($oldRecords[0] != $records[$i]) {
 				$newRecords[] = $records[$i];
 			} else {

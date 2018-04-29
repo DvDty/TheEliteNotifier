@@ -12,6 +12,7 @@ class RecordsController
 			'pd-uwr' => [],
 			'pd-wr'  => []
 		];
+
 		$urls = [
 			'ge-uwr' => 'https://rankings.the-elite.net/ge-untieds.rss',
 			'ge-wr'  => 'https://rankings.the-elite.net/ge-wrs.rss',

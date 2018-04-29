@@ -10,7 +10,7 @@ class Notifier
 	private $records = [];
 
 
-	public function start()
+	public function run()
 	{
 		$this->records = RecordsController::setRecords();
 		UpdaterController::checkForChanges($this->records);
