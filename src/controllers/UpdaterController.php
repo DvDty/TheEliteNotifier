@@ -41,7 +41,7 @@ class UpdaterController
 			}
 		}
 
-		if (count($newRecords)) {
+		if ($newRecords) {
 			self::saveChanges($records, $type);
 			EmailController::send($newRecords);
 		}

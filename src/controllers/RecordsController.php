@@ -6,12 +6,7 @@ class RecordsController
 {
 	public static function setRecords()
 	{
-		$records = [
-			'ge-uwr' => [],
-			'ge-wr'  => [],
-			'pd-uwr' => [],
-			'pd-wr'  => []
-		];
+		$records = [];
 
 		$urls = [
 			'ge-uwr' => 'https://rankings.the-elite.net/ge-untieds.rss',
