@@ -1,12 +1,13 @@
 <?php
 
-namespace PavelGrancharov\TheEliteNotifier\Controllers;
+namespace DvDty\TheEliteNotifier\Controllers;
 
 use Controller;
 
 class RecordsController extends Controller
 {
-	public static function setRecords()
+
+	public  function getRecords(): array
 	{
 		$records = [];
 
@@ -18,75 +19,22 @@ class RecordsController extends Controller
 		];
 
 		foreach ($urls as $type => $url) {
-			$feed = file_get_contents($url);
-			$records[$type] = self::parseFeed($feed, $type);
+			$records[$type] = $this->fetchRss($url);
 		}
 
 		return $records;
 	}
 
+	public function fetchRss($url = ''): array {
+		$rss = file_get_contents($url);
 
-	public static function parseFeed(string $feed, string $type)
-	{
-		$parserStart = '<webMaster>ryandwyer1@gmail.com (Ryan Dwyer)</webMaster>';
-		$parserEnd = '</channel>';
-		$removes = [
-			'</item>',
-			'</title>',
-			'</link>',
-			'</description>',
-			'</pubDate>',
-			'Untied: '
-		];
-
-		$xml = explode($parserEnd, explode($parserStart, $feed)[1])[0];
-
-		foreach ($removes as $remove) {
-			$xml = str_replace($remove, '', $xml);
+		if (!$rss) {
+			$this->email->sendException('url is down');
+			return [];
 		}
 
-		$xmls = explode('<item>', $xml);
-		array_shift($xmls);
-		$records = [];
+		$std = simplexml_load_string($rss)->channel;
 
-		foreach ($xmls as $xml) {
-			$title = trim(explode('<link>', explode('<title>', $xml)[1])[0]);
-			$title = explode(" - ", $title);
-			$stage = $title[0];
-
-			switch ($title[1]) {
-				case 'A':
-					$level = 'Agent';
-					break;
-				case 'SA':
-					$level = 'Secret Agent';
-					break;
-				case '00A':
-					$level = '00 Agent';
-					break;
-				default:
-					$level = 'XML Parsing error';
-					break;
-			}
-
-			$time = explode(' by ', $title[2])[0];
-			$runner = explode(' by ', $title[2])[1];
-			$url = trim(explode('<description>', explode('<link>', $xml)[1])[0]);
-			$description = trim(explode('<pubDate>', explode('<description>', $xml)[1])[0]);
-			$date = trim(explode('<guid>', explode('<pubDate>', $xml)[1])[0]);
-
-			$records[] = [
-				'type'        => $type,
-				'stage'       => $stage,
-				'level'       => $level,
-				'time'        => $time,
-				'runner'      => $runner,
-				'url'         => $url,
-				'description' => $description,
-				'date'        => $date
-			];
-		}
-
-		return $records;
+		return json_decode(json_encode($std))->item;
 	}
 }
