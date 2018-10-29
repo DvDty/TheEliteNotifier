@@ -4,7 +4,7 @@ namespace DvDty\TheEliteNotifier\Controllers;
 
 class UpdaterController
 {
-	const MAX_RECORDS = 50;
+	public const MAX_RECORDS = 50;
 
 	public static function checkForChanges(array $worldRecords)
 	{
@@ -23,7 +23,7 @@ class UpdaterController
 
 	public static function getOldRecords(string $type)
 	{
-		$old = file_get_contents('src/static/records/' . $type . '.json');
+		$old = file_get_contents('src/resources/records/' . $type . '.json');
 		return json_decode($old, true);
 	}
 
