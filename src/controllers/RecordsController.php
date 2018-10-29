@@ -2,7 +2,9 @@
 
 namespace PavelGrancharov\TheEliteNotifier\Controllers;
 
-class RecordsController
+use Controller;
+
+class RecordsController extends Controller
 {
 	public static function setRecords()
 	{
