@@ -1,18 +1,18 @@
 <?php
 
-namespace PavelGrancharov\TheEliteNotifier;
+namespace DvDty\TheEliteNotifier;
 
-use PavelGrancharov\TheEliteNotifier\Controllers\RecordsController;
-use PavelGrancharov\TheEliteNotifier\Controllers\UpdaterController;
+use DvDty\TheEliteNotifier\Controllers\RecordsController;
+use DvDty\TheEliteNotifier\Controllers\UpdaterController;
 
 class Notifier
 {
-	private $records = [];
+	private $records;
 
-
-	public function run()
+	public function run(): void
 	{
-		$this->records = RecordsController::setRecords();
-		UpdaterController::checkForChanges($this->records);
+		$this->records = (new RecordsController())->getRecords();
+
+//		UpdaterController::checkForChanges($this->newRecords);
 	}
 }
