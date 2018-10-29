@@ -1,5 +1,5 @@
 <?php
 
-namespace PavelGrancharov\TheEliteNotifier\Config;
+namespace DvDty\TheEliteNotifier\Config;
 
 

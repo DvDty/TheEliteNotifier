@@ -1,6 +1,6 @@
 <?php
 
-namespace PavelGrancharov\TheEliteNotifier\Controllers;
+namespace DvDty\TheEliteNotifier\Controllers;
 
 class EmailController
 {
@@ -28,5 +28,10 @@ class EmailController
 		foreach ($TOs as $to) {
 			mail($to, $subject, $message, $headers);
 		}
+	}
+
+	public function sendException($message = ''): void
+	{
+		// todo;
 	}
 }

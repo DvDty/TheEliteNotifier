@@ -1,6 +1,6 @@
 <?php
 
-use PavelGrancharov\TheEliteNotifier\Notifier;
+use DvDty\TheEliteNotifier\Notifier;
 
 require __DIR__ . '/vendor/autoload.php';
 

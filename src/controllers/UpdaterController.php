@@ -1,6 +1,6 @@
 <?php
 
-namespace PavelGrancharov\TheEliteNotifier\Controllers;
+namespace DvDty\TheEliteNotifier\Controllers;
 
 class UpdaterController
 {
