@@ -10,6 +10,6 @@ abstract class Controller
 
 	public function __construct()
 	{
-		$this->email = new EmailController();
+		$this->email = new EmailService();
 	}
 }
