@@ -83,7 +83,7 @@ final class RecordsController extends Controller
 		foreach ($this->types as $type) {
 			for ($i = 0; $i < self::RSS_LIMIT; $i++) {
 				if ($this->savedRecords[$type][0]->title != $this->liveRecords[$type][$i]->title) {
-					$this->newRecords[] = $this->liveRecords['ge-untieds'][$i];
+					$this->newRecords[$type][] = $this->liveRecords[$type][$i];
 					continue;
 				}
 
@@ -101,6 +101,6 @@ final class RecordsController extends Controller
 
 	private function notifyUsers()
 	{
-
+		$this->email->send($this->newRecords);
 	}
 }
