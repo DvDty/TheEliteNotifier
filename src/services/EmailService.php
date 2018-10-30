@@ -6,9 +6,10 @@ use DvDty\TheEliteNotifier\Models\RssRecord;
 
 class EmailService
 {
-	private $headers = [
+	public const HEADERS = [
 		'MIME-Version: 1.0',
 		'Content-Type: text/html; charset=ISO-8859-1',
+		'From: golden-eye@aluminadream.com',
 	];
 
 	private $receivers = [
@@ -39,10 +40,10 @@ class EmailService
 	private function send(string $receiver = '', string $title = '', string $message = '', array $headers = []): void
 	{
 		if (!$headers) {
-			$headers = $this->headers;
+			$headers = self::HEADERS;
 		}
 
-		mail($receiver, $title, $message, $headers);
+		mail($receiver, $title, $message, implode("\r\n", $headers));
 	}
 
 
@@ -93,7 +94,11 @@ class EmailService
 		$html = file_get_contents(__DIR__ . '/../resources/templates/record.html');
 
 		foreach ($params as $key => $value) {
-			$html = str_replace('{{ ' . strtolower($key) . ' }}', $value, $html);
+			if (!is_string($value)) {
+				$value = '';
+			}
+
+			$html = str_replace('{{ ' . $key . ' }}', $value, $html);
 		}
 
 		return $html;

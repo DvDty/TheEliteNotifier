@@ -97,7 +97,7 @@ final class RecordsController extends Controller
 	{
 		foreach ($this->types as $type) {
 			if ($this->newRecords[$type]) {
-				$json = json_decode($this->newRecords[$type]);
+				$json = json_encode($this->newRecords[$type]);
 
 				file_put_contents(__DIR__ . '../resources/records/' . $type . '.json', $json);
 			}
