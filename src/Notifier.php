@@ -3,7 +3,6 @@
 namespace DvDty\TheEliteNotifier;
 
 use DvDty\TheEliteNotifier\Controllers\RecordsController;
-use DvDty\TheEliteNotifier\Controllers\UpdaterController;
 
 class Notifier
 {

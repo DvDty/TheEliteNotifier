@@ -2,9 +2,7 @@
 
 namespace DvDty\TheEliteNotifier\Controllers;
 
-use Controller;
-
-class RecordsController extends Controller
+final class RecordsController extends Controller
 {
 
 	public  function getRecords(): array

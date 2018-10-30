@@ -1,8 +1,8 @@
 <?php
 
-namespace DvDty\TheEliteNotifier\Controllers;
+namespace DvDty\TheEliteNotifier\Services;
 
-class EmailController
+class EmailService
 {
 	public static function send(array $records)
 	{

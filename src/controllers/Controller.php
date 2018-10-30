@@ -1,6 +1,8 @@
 <?php
 
-use DvDty\TheEliteNotifier\Controllers\EmailController;
+namespace DvDty\TheEliteNotifier\Controllers;
+
+use DvDty\TheEliteNotifier\Services\EmailService;
 
 abstract class Controller
 {
