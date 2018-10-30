@@ -15,10 +15,12 @@ class EmailService
 		'dvdtygc@gmail.com',
 	];
 
-	private $from = 'golden-eye@aluminabuild.com';
+	public const SUPPORTED_VIDEO_SERVICES = [
+		'youtube' => 'https://www.youtube.com/watch?v=',
+	];
 
 
-	public function send(array $records = [])
+	public function sendRecordUpdates(array $records = []): void
 	{
 		foreach ($records as $types) {
 			/** @var RssRecord $record */
@@ -26,10 +28,21 @@ class EmailService
 				$title = $this->createTitle($record->title);
 				$message = $this->createMessage($record);
 
-			foreach ($this->receivers as $receiver) {
-				mail($receiver, $title, $message, $this->headers);
+				foreach ($this->receivers as $receiver) {
+					$this->send($receiver, $title, $message);
+				}
 			}
 		}
+	}
+
+
+	private function send(string $receiver = '', string $title = '', string $message = '', array $headers = []): void
+	{
+		if (!$headers) {
+			$headers = $this->headers;
+		}
+
+		mail($receiver, $title, $message, $headers);
 	}
 
 
@@ -39,14 +52,56 @@ class EmailService
 	}
 
 
-	private function getTemplate(object $record): string
+	private function createVideoLink(string $videoType = '', string $videoId = ''): string
 	{
-		return '';
+		if (!array_key_exists($videoType, self::SUPPORTED_VIDEO_SERVICES)) {
+			return $videoType;
+		}
+
+		return self::SUPPORTED_VIDEO_SERVICES[$videoType] . $videoId;
 	}
 
 
-	public function sendException($message = ''): void
+	private function getStageImage(string $stage = 'Dam', string $extension = 'jpg', string $mime = 'image/jpeg'): string
 	{
-		// todo;
+		$image = file_get_contents(__DIR__ . '/../resources/images/stages/ge/' . $stage . '.' . $extension);
+		return 'data:image/' . $mime . ';base64,' . base64_encode($image);
+	}
+
+
+	private function createMessage(object $record = NULL): string
+	{
+		if (NULL === $record) {
+			return '';
+		}
+
+		return $this->getTemplate([
+			'image'    => $this->getStageImage($record->stage),
+			'name'     => $record->playerName,
+			'nickname' => $record->playerAlias,
+			'stage'    => $record->stage,
+			'time'     => $record->timeHms,
+			'system'   => $record->system,
+			'comment'  => $record->comment,
+			'link'     => $this->createVideoLink($record->videoType, $record->videoId),
+		]);
+	}
+
+
+	private function getTemplate(array $params = []): string
+	{
+		$html = file_get_contents(__DIR__ . '/../resources/templates/record.html');
+
+		foreach ($params as $key => $value) {
+			$html = str_replace('{{ ' . strtolower($key) . ' }}', $value, $html);
+		}
+
+		return $html;
+	}
+
+
+	public function sendException(string $message = ''): void
+	{
+		$this->send($this->receivers[0], $this->createTitle('Something is not working correctly'), $message);
 	}
 }
