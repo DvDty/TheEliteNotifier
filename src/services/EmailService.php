@@ -4,31 +4,43 @@ namespace DvDty\TheEliteNotifier\Services;
 
 class EmailService
 {
-	public static function send(array $records)
+	private $headers = [
+		'MIME-Version: 1.0',
+		'Content-Type: text/html; charset=ISO-8859-1',
+	];
+
+	private $receivers = [
+		'dvdtygc@gmail.com',
+	];
+
+	private $from = 'golden-eye@aluminabuild.com';
+
+
+	public function send(array $records = [])
 	{
-		$TOs = [
-			'dvdtygc@gmail.com',
-		];
+		foreach ($records as $record) {
+			$title = $this->createTitle('New World Record');
 
-		$from = 'golden-eye@aluminabuild.com';
+			$message = $this->getTemplate($record);
 
-		$headers = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'From: ' . $from . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-		$subject = 'The Elite - new world records!';
-		$message = '<h1>The Elite Notifier</h1><br><br>';
-
-		foreach ($records as $r) {
-			$message .= "<h2>" . $r['runner'] . "</h2>" . " just got ";
-			$message .= "<a href='" . $r['url'] . "'>" . $r['time'] . "</a>" . " on " . $r['stage'];
-			$message .= " (" . $r['level'] . ")!";
-		}
-
-		foreach ($TOs as $to) {
-			mail($to, $subject, $message, $headers);
+			foreach ($this->receivers as $receiver) {
+				mail($receiver, $title, $message, $this->headers);
+			}
 		}
 	}
+
+
+	private function createTitle(string $title = ''): string
+	{
+		return 'TheEliteNotifier - ' . $title;
+	}
+
+
+	private function getTemplate(object $record): string
+	{
+		return '';
+	}
+
 
 	public function sendException($message = ''): void
 	{
