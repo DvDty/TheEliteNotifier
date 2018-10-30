@@ -2,6 +2,8 @@
 
 namespace DvDty\TheEliteNotifier\Services;
 
+use DvDty\TheEliteNotifier\Models\RssRecord;
+
 class EmailService
 {
 	private $headers = [
@@ -18,10 +20,11 @@ class EmailService
 
 	public function send(array $records = [])
 	{
-		foreach ($records as $record) {
-			$title = $this->createTitle('New World Record');
-
-			$message = $this->getTemplate($record);
+		foreach ($records as $types) {
+			/** @var RssRecord $record */
+			foreach ($types as $record) {
+				$title = $this->createTitle($record->title);
+				$message = $this->createMessage($record);
 
 			foreach ($this->receivers as $receiver) {
 				mail($receiver, $title, $message, $this->headers);
