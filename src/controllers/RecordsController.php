@@ -96,10 +96,10 @@ final class RecordsController extends Controller
 	private function saveNewRecords(): void
 	{
 		foreach ($this->types as $type) {
-			if ($this->newRecords[$type]) {
-				$json = json_encode($this->newRecords[$type]);
+			if ($this->liveRecords[$type]) {
+				$json = json_encode($this->liveRecords[$type]);
 
-				file_put_contents(__DIR__ . '../resources/records/' . $type . '.json', $json);
+				file_put_contents(__DIR__ . '/../resources/records/' . $type . '.json', $json);
 			}
 		}
 	}
