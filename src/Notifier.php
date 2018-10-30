@@ -6,12 +6,10 @@ use DvDty\TheEliteNotifier\Controllers\RecordsController;
 
 class Notifier
 {
-	private $records;
 
-	public function run(): void
+	public function __construct()
 	{
-		$this->records = (new RecordsController())->getRecords();
-
-//		UpdaterController::checkForChanges($this->newRecords);
+		$recordsController = new RecordsController();
+		$recordsController->execute();
 	}
 }
