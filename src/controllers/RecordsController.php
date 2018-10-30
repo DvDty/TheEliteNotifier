@@ -15,11 +15,11 @@ final class RecordsController extends Controller
 		//		'pd-wrs',
 	];
 
-	const RSS_LIMIT = 50;
-	const API_BASE_URL = 'https://rankings.the-elite.net/';
+	public const RSS_LIMIT    = 50;
+	public const API_BASE_URL = 'https://rankings.the-elite.net/';
 
 
-	public function execute()
+	public function execute(): void
 	{
 		$this->getNewRecords();
 		$this->getOldRecords();
@@ -72,7 +72,7 @@ final class RecordsController extends Controller
 	}
 
 
-	private function getApiUrl(string $type = 'ge-untieds', string $extension = 'rss')
+	private function getApiUrl(string $type = 'ge-untieds', string $extension = 'rss'): string
 	{
 		return self::API_BASE_URL . $type . '.' . $extension;
 	}
@@ -82,7 +82,7 @@ final class RecordsController extends Controller
 	{
 		foreach ($this->types as $type) {
 			for ($i = 0; $i < self::RSS_LIMIT; $i++) {
-				if ($this->savedRecords[$type][0]->title != $this->liveRecords[$type][$i]->title) {
+				if ($this->savedRecords[$type][0]->title !== $this->liveRecords[$type][$i]->title) {
 					$this->newRecords[$type][] = $this->liveRecords[$type][$i];
 					continue;
 				}
@@ -93,14 +93,14 @@ final class RecordsController extends Controller
 	}
 
 
-	private function saveNewRecords()
+	private function saveNewRecords(): void
 	{
 
 	}
 
 
-	private function notifyUsers()
+	private function notifyUsers(): void
 	{
-		$this->email->send($this->newRecords);
+		$this->email->sendRecordUpdates($this->newRecords);
 	}
 }
