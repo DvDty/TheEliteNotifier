@@ -1,7 +1,5 @@
 <?php
 
-namespace DvDty\TheEliteNotifier\Controllers;
-
 final class RecordsController extends Controller
 {
 	private $liveRecords = [];
