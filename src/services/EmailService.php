@@ -80,7 +80,7 @@ class EmailService extends Service
 			'stage'      => $record->stage,
 			'time'       => $record->timeHms,
 			'system'     => $record->system,
-			'comment'    => '"' . $record->comment . '"',
+			'comment'    => $this->formatComment($record->comment),
 			'link'       => $this->createVideoLink($record->videoType, $record->videoId),
 			'difficulty' => $record->difficulty,
 		]);
@@ -105,6 +105,16 @@ class EmailService extends Service
 		}
 
 		return $html;
+	}
+
+
+	private function formatComment($comment): string
+	{
+		if (!is_string($comment)) {
+			return '';
+		}
+
+		return '"' . $comment . '"';
 	}
 
 
