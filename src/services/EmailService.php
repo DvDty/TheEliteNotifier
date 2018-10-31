@@ -2,7 +2,7 @@
 
 class EmailService extends Service
 {
-	public const HEADERS = [
+	private const HEADERS = [
 		'MIME-Version: 1.0',
 		'Content-Type: text/html; charset=ISO-8859-1',
 		'From: golden-eye@aluminadream.com',
@@ -12,7 +12,7 @@ class EmailService extends Service
 		'dvdtygc@gmail.com',
 	];
 
-	public const SUPPORTED_VIDEO_SERVICES = [
+	private const SUPPORTED_VIDEO_SERVICES = [
 		'youtube' => 'https://www.youtube.com/watch?v=',
 	];
 
@@ -61,7 +61,7 @@ class EmailService extends Service
 	}
 
 
-	private function getStageImage(string $stage = 'Dam', string $extension = 'jpg', string $mime = 'image/jpeg'): string
+	private function getStageImageUrl(string $stage = 'Dam', string $extension = 'jpg'): string
 	{
 		return $this->getBaseUrl() . 'src/resources/images/stages/ge/' . $stage . '.' . $extension;
 	}
@@ -74,14 +74,15 @@ class EmailService extends Service
 		}
 
 		return $this->getTemplate([
-			'image'    => $this->getStageImage($record->stage),
-			'name'     => $record->playerName,
-			'nickname' => $record->playerAlias,
-			'stage'    => $record->stage,
-			'time'     => $record->timeHms,
-			'system'   => $record->system,
-			'comment'  => $record->comment,
-			'link'     => $this->createVideoLink($record->videoType, $record->videoId),
+			'image'      => $this->getStageImageUrl($record->stage),
+			'name'       => $record->playerName,
+			'nickname'   => $record->playerAlias,
+			'stage'      => $record->stage,
+			'time'       => $record->timeHms,
+			'system'     => $record->system,
+			'comment'    => '"' . $record->comment . '"',
+			'link'       => $this->createVideoLink($record->videoType, $record->videoId),
+			'difficulty' => $record->difficulty,
 		]);
 	}
 

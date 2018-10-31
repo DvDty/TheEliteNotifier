@@ -1,5 +1,6 @@
 <html>
 <head>
+	<!--suppress CssUnknownTarget -->
 	<style>
 		body, html {
 			margin: 0;
@@ -10,10 +11,18 @@
 			box-sizing: border-box;
 		}
 
-		.container {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
+		.stage-image {
+			min-height: 160px;
+			background: url('{{ image }}') no-repeat center center;
+		}
+
+		h2, h3, a {
+			text-align: center;
+		}
+
+		a {
+			display: inline-block;
+			width: 100%;
 		}
 	</style>
 </head>
@@ -21,14 +30,20 @@
 
 <div class="container">
 	<!--suppress HtmlUnknownTarget -->
-	<img src="{{ image }}">
+	<div class="stage-image"></div>
 
-	<h2>{{ name }} ({{ nickname }}) just untied {{ stage }}!</h2>
+	<br>
+
+	<h2>{{ name }} ({{ nickname }}) just untied {{ stage }} {{ difficulty }}!</h2>
 	<h3>The new world record is {{ time }}, set on {{ system }}.</h3>
-	<h3><i>"{{ comment }}"</i></h3>
+	<h3><i>{{ comment }}</i></h3>
 
-	<!--suppress HtmlUnknownTarget -->
-	<a href="{{ link }}">{{ link }}</a>
+	<br>
+
+	<div>
+		<!--suppress HtmlUnknownTarget -->
+		<a href="{{ link }}">{{ link }}</a>
+	</div>
 </div>
 
 </body>
