@@ -1,9 +1,5 @@
 <?php
 
-namespace DvDty\TheEliteNotifier\Services;
-
-use DvDty\TheEliteNotifier\Models\RssRecord;
-
 class EmailService
 {
 	public const HEADERS = [

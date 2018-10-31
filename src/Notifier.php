@@ -1,9 +1,5 @@
 <?php
 
-namespace DvDty\TheEliteNotifier;
-
-use DvDty\TheEliteNotifier\Controllers\RecordsController;
-
 class Notifier
 {
 

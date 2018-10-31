@@ -1,7 +1,5 @@
 <?php
 
-namespace DvDty\TheEliteNotifier\Models;
-
 class RssRecord
 {
 	public $title;
