@@ -10,8 +10,11 @@ spl_autoload_register(function ($class) {
 		if(file_exists($file)) {
 			/** @noinspection PhpIncludeInspection */
 			include_once $file;
+			return true;
 		}
 	}
+
+	return false;
 });
 
 new Notifier();
