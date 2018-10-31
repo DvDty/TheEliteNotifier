@@ -1,6 +1,6 @@
 <?php
 
-class EmailService
+class EmailService extends Service
 {
 	public const HEADERS = [
 		'MIME-Version: 1.0',
@@ -39,7 +39,9 @@ class EmailService
 			$headers = self::HEADERS;
 		}
 
-		mail($receiver, $title, $message, implode("\r\n", $headers));
+		if ($this->isProd()) {
+			mail($receiver, $title, $message, implode("\r\n", $headers));
+		}
 	}
 
 
@@ -61,8 +63,7 @@ class EmailService
 
 	private function getStageImage(string $stage = 'Dam', string $extension = 'jpg', string $mime = 'image/jpeg'): string
 	{
-		$image = file_get_contents(__DIR__ . '/../resources/images/stages/ge/' . $stage . '.' . $extension);
-		return 'data:image/' . $mime . ';base64,' . base64_encode($image);
+		return $this->getBaseUrl() . 'src/resources/images/stages/ge/' . $stage . '.' . $extension;
 	}
 
 
@@ -95,6 +96,11 @@ class EmailService
 			}
 
 			$html = str_replace('{{ ' . $key . ' }}', $value, $html);
+		}
+
+		if (!$this->isProd()) {
+			echo $html;
+			exit;
 		}
 
 		return $html;

@@ -97,7 +97,9 @@ final class RecordsController extends Controller
 			if ($this->liveRecords[$type]) {
 				$json = json_encode($this->liveRecords[$type]);
 
-				file_put_contents(__DIR__ . '/../resources/records/' . $type . '.json', $json);
+				if ($this->service->isProd()) {
+					file_put_contents(__DIR__ . '/../resources/records/' . $type . '.json', $json);
+				}
 			}
 		}
 	}
