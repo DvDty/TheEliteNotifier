@@ -2,19 +2,19 @@
 
 final class RecordsController extends Controller
 {
+
+	public const RSS_LIMIT = 50;
+	public const API_BASE_URL = 'https://rankings.the-elite.net/';
+
 	private $liveRecords = [];
 	private $savedRecords = [];
 	private $newRecords = [];
-
 	private $types = [
 		'ge-untieds',
-		//		'ge-wrs',
-		//		'pd-untieds',
-		//		'pd-wrs',
+		'ge-wrs',
+		'pd-untieds',
+		'pd-wrs',
 	];
-
-	public const RSS_LIMIT    = 50;
-	public const API_BASE_URL = 'https://rankings.the-elite.net/';
 
 
 	public function execute(): void
@@ -43,15 +43,6 @@ final class RecordsController extends Controller
 	}
 
 
-	private function getOldRecords(): void
-	{
-		foreach ($this->types as $type) {
-			$records = file_get_contents('src/resources/records/' . $type . '.json');
-			$this->savedRecords[$type] = json_decode($records);
-		}
-	}
-
-
 	private function fetchRss(string $type = 'ge-untieds'): array
 	{
 		$url = $this->getApiUrl($type);
@@ -73,6 +64,15 @@ final class RecordsController extends Controller
 	private function getApiUrl(string $type = 'ge-untieds', string $extension = 'rss'): string
 	{
 		return self::API_BASE_URL . $type . '.' . $extension;
+	}
+
+
+	private function getOldRecords(): void
+	{
+		foreach ($this->types as $type) {
+			$records = file_get_contents('src/resources/records/' . $type . '.json');
+			$this->savedRecords[$type] = json_decode($records);
+		}
 	}
 
 

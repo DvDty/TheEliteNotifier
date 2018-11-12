@@ -2,8 +2,10 @@
 
 abstract class Controller
 {
+
 	protected $email;
 	protected $service;
+
 
 	public function __construct()
 	{

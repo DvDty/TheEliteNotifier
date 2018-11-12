@@ -2,6 +2,7 @@
 
 class RssRecord
 {
+
 	public $title;
 	public $link;
 	public $description;

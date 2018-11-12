@@ -1,49 +1,49 @@
 <html>
 <head>
-	<!--suppress CssUnknownTarget -->
-	<style>
-		body, html {
-			margin: 0;
-			background-color: #eaeaea;
-		}
+    <!--suppress CssUnknownTarget -->
+    <style>
+        body, html {
+            margin: 0;
+            background-color: #eaeaea;
+        }
 
-		*, *:before, *:after {
-			box-sizing: border-box;
-		}
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
 
-		.stage-image {
-			min-height: 160px;
-			background: url('{{ image }}') no-repeat center center;
-		}
+        .stage-image {
+            min-height: 160px;
+            background: url('{{ image }}') no-repeat center center;
+        }
 
-		h2, h3, a {
-			text-align: center;
-		}
+        h2, h3, a {
+            text-align: center;
+        }
 
-		a {
-			display: inline-block;
-			width: 100%;
-		}
-	</style>
+        a {
+            display: inline-block;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-	<!--suppress HtmlUnknownTarget -->
-	<div class="stage-image"></div>
+    <!--suppress HtmlUnknownTarget -->
+    <div class="stage-image"></div>
 
-	<br>
+    <br>
 
-	<h2>{{ name }} ({{ nickname }}) just untied {{ stage }} {{ difficulty }}!</h2>
-	<h3>The new world record is {{ time }}, set on {{ system }}.</h3>
-	<h3><i>{{ comment }}</i></h3>
+    <h2>{{ name }} ({{ nickname }}) just untied {{ stage }} {{ difficulty }}!</h2>
+    <h3>The new world record is {{ time }}, set on {{ system }}.</h3>
+    <h3><i>{{ comment }}</i></h3>
 
-	<br>
+    <br>
 
-	<div>
-		<!--suppress HtmlUnknownTarget -->
-		<a href="{{ link }}">{{ link }}</a>
-	</div>
+    <div>
+        <!--suppress HtmlUnknownTarget -->
+        <a href="{{ link }}">{{ link }}</a>
+    </div>
 </div>
 
 </body>
