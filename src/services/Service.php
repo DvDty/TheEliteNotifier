@@ -26,7 +26,7 @@ class Service
 	}
 
 
-	private function getConfig(string $key = '', $default = ''): string
+	public function getConfig(string $key = '', $default = ''): string
 	{
 		if (!file_exists(__DIR__ . '/../../config.ini')) {
 			return $default;

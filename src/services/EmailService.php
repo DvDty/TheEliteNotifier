@@ -13,9 +13,13 @@ class EmailService extends Service
 		'youtube' => 'https://www.youtube.com/watch?v=',
 	];
 
-	private const RECEIVERS = [
-		'dvdtygc@gmail.com',
-	];
+	private $receivers = [];
+
+
+	public function __construct()
+	{
+		$this->setReceivers();
+	}
 
 
 	public function sendRecordUpdates(array $records = []): void
@@ -26,7 +30,7 @@ class EmailService extends Service
 				$title = $this->createTitle($record->title);
 				$message = $this->createMessage($record);
 
-				foreach (self::RECEIVERS as $receiver) {
+				foreach ($this->receivers as $receiver) {
 					$this->send($receiver, $title, $message);
 				}
 			}
@@ -129,6 +133,13 @@ class EmailService extends Service
 
 	public function sendException(string $message = ''): void
 	{
-		$this->send(self::RECEIVERS[0], $this->createTitle('Something is not working correctly'), $message);
+		$this->send($this->receivers[0], $this->createTitle('Something is not working correctly'), $message);
+	}
+
+
+	private function setReceivers()
+	{
+		$receivers = $this->getConfig('receivers');
+		$this->receivers = explode(',', $receivers);
 	}
 }
