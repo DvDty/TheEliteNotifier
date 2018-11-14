@@ -6,7 +6,7 @@ class EmailService extends Service
 	private const HEADERS = [
 		'MIME-Version: 1.0',
 		'Content-Type: text/html; charset=ISO-8859-1',
-		'From: golden-eye@aluminadream.com',
+		'From: TheEliteNotifier@aluminadream.com',
 	];
 
 	private const SUPPORTED_VIDEO_SERVICES = [
