@@ -8,6 +8,7 @@ class EmailService extends Service
 		'Content-Type: text/html; charset=ISO-8859-1',
 		'From: golden-eye@aluminadream.com',
 	];
+
 	private const SUPPORTED_VIDEO_SERVICES = [
 		'youtube' => 'https://www.youtube.com/watch?v=',
 	];
@@ -82,6 +83,8 @@ class EmailService extends Service
 
 	private function getStageImageUrl(string $stage = 'Dam', string $game = 'ge', string $extension = 'jpg'): string
 	{
+		$stage = preg_replace('/\s/', '', $stage);
+
 		return $this->getBaseUrl() . 'src/resources/images/stages/' . $game . '/' . $stage . '.' . $extension;
 	}
 
