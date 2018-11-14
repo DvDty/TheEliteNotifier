@@ -65,7 +65,7 @@ class EmailService extends Service
 			'comment'    => $this->formatComment($record->comment),
 			'link'       => $this->createVideoLink($record->videoType, $record->videoId),
 			'difficulty' => $record->difficulty,
-			'verb'       => $record->untiedWorldRecord ? 'untied' : 'achieved',
+			'verb'       => $record->untiedWorldRecord === 'true' ? 'untied' : 'achieved',
 		]);
 	}
 
