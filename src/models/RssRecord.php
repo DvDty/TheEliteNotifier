@@ -23,4 +23,6 @@ class RssRecord
 	public $fromTimeSeconds;
 	public $system;
 	public $comment;
+	public $videoType;
+	public $videoId;
 }

@@ -40,7 +40,12 @@ class EmailService extends Service
 	}
 
 
-	private function createMessage(object $record = null): string
+	/**
+	 * @var RssRecord $record
+	 *
+	 * @return string
+	 */
+	private function createMessage($record = null): string
 	{
 		if (null === $record) {
 			return '';
@@ -56,6 +61,7 @@ class EmailService extends Service
 			'comment'    => $this->formatComment($record->comment),
 			'link'       => $this->createVideoLink($record->videoType, $record->videoId),
 			'difficulty' => $record->difficulty,
+			'verb'       => $record->untiedWorldRecord ? 'untied' : 'achieved',
 		]);
 	}
 

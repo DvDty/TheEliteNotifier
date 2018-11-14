@@ -13,7 +13,6 @@
 
         .stage-image {
             min-height: 160px;
-            background: url('{{ image }}') no-repeat center center;
         }
 
         h2, h3, a {
@@ -29,13 +28,13 @@
 <body>
 
 <div class="container">
-    <!--suppress HtmlUnknownTarget -->
-    <div class="stage-image"></div>
+    <!--suppress HtmlUnknownTarget, CssUnknownTarget -->
+    <div class="stage-image" style="background: url('{{ image }}') no-repeat center center;"></div>
 
     <br>
 
-    <h2>{{ name }} ({{ nickname }}) just untied {{ stage }} {{ difficulty }}!</h2>
-    <h3>The new world record is {{ time }}, set on {{ system }}.</h3>
+    <h2>{{ name }} ({{ nickname }}) just {{ verb }} {{ stage }} {{ difficulty }}!</h2>
+    <h3>He got {{ time }}, while playing on {{ system }}.</h3>
     <h3><i>{{ comment }}</i></h3>
 
     <br>
