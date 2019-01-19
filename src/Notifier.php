@@ -1,5 +1,9 @@
 <?php
 
+namespace Notifier;
+
+use Notifier\Controllers\RecordsController;
+
 class Notifier
 {
 

@@ -1,5 +1,10 @@
 <?php
 
+namespace Notifier\Controllers;
+
+use Notifier\Services\EmailService;
+use Notifier\Services\Service;
+
 abstract class Controller
 {
 

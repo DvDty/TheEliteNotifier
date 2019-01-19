@@ -1,5 +1,7 @@
 <?php
 
+namespace Notifier\Services;
+
 class Service
 {
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace Notifier\Controllers;
+
 final class RecordsController extends Controller
 {
 
@@ -48,16 +50,20 @@ final class RecordsController extends Controller
 		$url = $this->getApiUrl($type);
 		$rss = file_get_contents($url);
 
-		$rss = str_replace('rnk:', '', $rss);
-
 		if (!$rss) {
 			$this->email->sendException('url is down');
 			return [];
 		}
 
-		$std = simplexml_load_string($rss)->channel;
+		$rss = str_replace('rnk:', '', $rss);
 
-		return json_decode(json_encode($std))->item;
+		$std = simplexml_load_string($rss);
+
+		if (!$std || !isset($std->channel)) {
+			return [];
+		}
+
+		return json_decode(json_encode($std->channel))->item;
 	}
 
 
@@ -71,6 +77,12 @@ final class RecordsController extends Controller
 	{
 		foreach ($this->types as $type) {
 			$records = file_get_contents('src/resources/records/' . $type . '.json');
+
+			if (!$records) {
+				$this->email->sendException('Unable to find resources for ' . $type);
+				continue;
+			}
+
 			$this->savedRecords[$type] = json_decode($records);
 		}
 	}

@@ -1,5 +1,7 @@
 <?php
 
+namespace Notifier\Models;
+
 class RssRecord
 {
 

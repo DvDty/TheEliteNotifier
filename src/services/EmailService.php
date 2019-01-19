@@ -1,5 +1,10 @@
 <?php
 
+namespace Notifier\Services;
+
+use Notifier\Models\RssRecord;
+use PhpParser\Node\Stmt\TraitUseAdaptation\Alias;
+
 class EmailService extends Service
 {
 
@@ -19,6 +24,13 @@ class EmailService extends Service
 	public function __construct()
 	{
 		$this->setReceivers();
+	}
+
+
+	private function setReceivers()
+	{
+		$receivers = $this->getConfig('receivers');
+		$this->receivers = explode(',', $receivers);
 	}
 
 
@@ -72,7 +84,14 @@ class EmailService extends Service
 
 	private function getTemplate(array $params = []): string
 	{
-		$html = file_get_contents(__DIR__ . '/../resources/templates/record.html');
+		$templatePath = '/../resources/templates/record.html';
+
+		$html = file_get_contents(__DIR__ . $templatePath);
+
+		if (!$html) {
+			$this->sendException($templatePath . ' was not found.');
+			return '';
+		}
 
 		foreach ($params as $key => $value) {
 			if (!is_string($value)) {
@@ -134,12 +153,5 @@ class EmailService extends Service
 	public function sendException(string $message = ''): void
 	{
 		$this->send($this->receivers[0], $this->createTitle('Something is not working correctly'), $message);
-	}
-
-
-	private function setReceivers()
-	{
-		$receivers = $this->getConfig('receivers');
-		$this->receivers = explode(',', $receivers);
 	}
 }
